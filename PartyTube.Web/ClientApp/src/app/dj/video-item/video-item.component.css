@@ -1,0 +1,13 @@
+.videoItemThumbnail:hover {
+  cursor: pointer;
+}
+
+.videoItemThumbnail {
+  width: 120px;
+  min-width: 120px;
+  max-width: 120px;
+
+  height: 90px;
+  min-height: 90px;
+  max-height: 90px;
+}

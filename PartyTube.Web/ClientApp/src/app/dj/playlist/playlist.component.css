@@ -1,0 +1,14 @@
+.removeButton {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.playlistItem:hover .removeButton {
+  display: block;
+}
+
+.playlistItem:hover {
+  background-color: aliceblue;
+}

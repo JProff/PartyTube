@@ -1,0 +1,13 @@
+{
+  "/api/*": {
+    "target": "http://localhost:6091/",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/Hubs/*": {
+    "target": "http://localhost:6091/",
+    "secure": false,
+    "logLevel": "debug",
+    "ws": true
+  }
+}

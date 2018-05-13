@@ -1,0 +1,46 @@
+<div class="container text-center mt-3"
+     *ngIf="!isLoading && currentPlaylistVideos.currentPlaylistItems.length === 0">
+  Current Playlist is Empty
+</div>
+<div class="container mt-3"
+     *ngIf="!isLoading && currentPlaylistVideos.currentPlaylistItems.length > 0">
+  <div class="row">
+    <div class="col-xl-8 offset-xl-2 mb-3">
+      <p>{{ "Videos: " + currentPlaylistVideos.currentPlaylistItems.length }}</p>
+      <div>
+
+        {{ "Duration: " + currentPlaylistVideos.totalMinutes + ":" + currentPlaylistVideos.totalSeconds }}
+
+        <button class="btn btn-outline-danger ml-5"
+                type="button"
+                (click)='clear()'>Clear</button>
+      </div>
+    </div>
+  </div>
+  <div [dragula]='"bag-one"'
+       [dragulaModel]='currentPlaylistVideos.currentPlaylistItems'>
+    <div class="row"
+         *ngFor="let item of currentPlaylistVideos.currentPlaylistItems; index as i;trackBy: trackByFn">
+      <div class="col-xl-8 offset-xl-2 mb-3 playlistItem">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-auto">
+              <div class="d-flex flex-md-column">
+                <div class="">{{ item.order }}</div>
+              </div>
+            </div>
+            <div class="col">
+              <app-video-item [videoItem]="item.video"
+                              class="w-100"></app-video-item>
+              <button class="btn btn-link text-dark removeButton"
+                      (click)="remove(item.id, i)"
+                      type="button">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

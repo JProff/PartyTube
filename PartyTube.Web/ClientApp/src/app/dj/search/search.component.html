@@ -1,0 +1,104 @@
+<div class="container mt-3">
+  <p *ngIf="!isFirstLoad && localVideos.length == 0 && youtubeVideos.length == 0 && term">
+    Your search -
+    <b>{{ term }}</b> - did not match any videos.
+  </p>
+  <ngb-accordion activeIds="localResultsPanel, youtubeResultsPanel"
+                 (panelChange)="beforeChange($event)">
+    <ngb-panel id="localResultsPanel"
+               *ngIf="localVideos.length > 0">
+      <ng-template ngbPanelTitle>
+        <span>Local Results: {{ localVideos.length }}</span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div class="row"
+             *ngFor="let localVideo of localVideos; index as localIndex;trackBy: localTrackByFn">
+          <div class="col-xl-8 offset-xl-2 mb-3 searchItem">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-auto">
+                  <div class="d-flex flex-md-column">
+                    <div class="">{{ localVideo.count }}</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="d-flex flex-row">
+                    <app-video-item [videoItem]="localVideo.videoItem"
+                                    class="w-100"></app-video-item>
+                    <div class="ml-auto dropdown dropleft">
+                      <button class="btn btn-link text-dark searchItemMenu"
+                              type="button"
+                              id="localDropdownMenuButton"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false">
+                        <i class="fa fa-ellipsis-v"></i>
+                      </button>
+                      <div class="dropdown-menu"
+                           aria-labelledby="localDropdownMenuButton">
+                        <a class="dropdown-item"
+                           (click)="addToCurrentPlaylist(localVideo.videoItem)">Add to current playlist</a>
+                        <a class="dropdown-item"
+                           (click)="playNext(localVideo.videoItem)">Play next</a>
+                        <a class="dropdown-item"
+                           (click)="playNow(localVideo.videoItem)">Play now</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="youtubeResultsPanel"
+               *ngIf="youtubeVideos.length > 0">
+      <ng-template ngbPanelTitle>
+        <span>Youtube Results Total: {{ youtubeTotal }}</span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div data-infinite-scroll
+             debounce
+             [infiniteScrollDistance]="scrollDistance"
+             [infiniteScrollThrottle]="throttle"
+             (scrolled)="onScrollDown()">
+          <div class="row"
+               *ngFor="let youtubeVideo of youtubeVideos; index as youtubeIndex;trackBy: youtubeTrackByFn">
+            <div class="col-xl-8 offset-xl-2 mb-3 searchItem">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <div class="d-flex flex-row">
+                      <app-video-item [videoItem]="youtubeVideo"
+                                      class="w-100"></app-video-item>
+                      <div class="ml-auto dropdown dropleft">
+                        <button class="btn btn-link text-dark searchItemMenu"
+                                type="button"
+                                id="youtubeDropdownMenuButton"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                          <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu"
+                             aria-labelledby="youtubeDropdownMenuButton">
+                          <a class="dropdown-item"
+                             (click)="addToCurrentPlaylist(youtubeVideo)">Add to current playlist</a>
+                          <a class="dropdown-item"
+                             (click)="playNext(youtubeVideo)">Play next</a>
+                          <a class="dropdown-item"
+                             (click)="playNow(youtubeVideo)">Play now</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>

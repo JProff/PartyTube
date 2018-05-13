@@ -1,0 +1,19 @@
+<div #videoItemContainer
+     class="d-flex align-items-start flex-column">
+  <div class="d-flex flex-row">
+    <img [src]="videoItem.thumbnailUrl"
+         class="mr-2 videoItemThumbnail"
+         (click)="play()">
+    <div class="d-flex align-items-start flex-column mr-4">
+      <span>
+        {{ videoItem.title }}
+      </span>
+      <span class="mt-auto">
+        {{ videoItem.minutes + ':' + videoItem.seconds }}
+      </span>
+    </div>
+  </div>
+  <div [ngClass]="{'mt-2': isPlayerVisible}">
+    <div id="{{ playerId }}"></div>
+  </div>
+</div>

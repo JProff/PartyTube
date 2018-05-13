@@ -1,0 +1,22 @@
+.videoItemMenu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.historyItem:hover .videoItemMenu {
+  display: block;
+}
+
+.historyItem:hover {
+  background-color: aliceblue;
+}
+
+.videoItemMenu[aria-expanded='true'] {
+  display: block;
+}
+
+.dropdown-item:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,52 @@
+<div class="container mt-3"
+     data-infinite-scroll
+     debounce
+     [infiniteScrollDistance]="scrollDistance"
+     [infiniteScrollThrottle]="throttle"
+     (scrolled)="onScrollDown()">
+  <div class="row"
+       *ngFor="let item of historyItems; index as i;trackBy: trackByFn">
+    <div class="col-xl-8 offset-xl-2 mb-3 historyItem">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-auto">
+            <div class="d-flex flex-md-column">
+              <div class="">{{ item.playedDateTime | date : "dd.MM.y" }}</div>
+              <div class="ml-2 ml-md-auto">{{ item.playedDateTime | date : "HH:mm" }}</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="d-flex flex-row">
+              <app-video-item [videoItem]="item.video"
+                              class="w-100"></app-video-item>
+              <div class="ml-auto dropdown dropleft">
+                <button class="btn btn-link text-dark videoItemMenu"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                  <i class="fa fa-ellipsis-v"></i>
+                </button>
+                <div class="dropdown-menu"
+                     aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item"
+                     (click)="addToCurrentPlaylist(item.video)">Add to current playlist</a>
+                  <a class="dropdown-item"
+                     (click)="playNext(item.video)">Play next</a>
+                  <a class="dropdown-item"
+                     (click)="playNow(item.video)">Play now</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item"
+                     (click)="removeFromHistory(i, item.id)">Remove from history</a>
+                  <a class="dropdown-item"
+                     (click)="removeAllEntriesFromHistory(item.video.videoIdentifier, i)">Remove all entries from history</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

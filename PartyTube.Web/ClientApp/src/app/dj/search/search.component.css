@@ -1,0 +1,22 @@
+.searchItemMenu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.searchItem:hover .searchItemMenu {
+  display: block;
+}
+
+.searchItem:hover {
+  background-color: aliceblue;
+}
+
+.searchItemMenu[aria-expanded='true'] {
+  display: block;
+}
+
+.dropdown-item:hover {
+  cursor: pointer;
+}
